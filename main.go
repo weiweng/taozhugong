@@ -27,7 +27,9 @@ func main() {
 		log.Fatal(err)
 	}
 
-	b.Handle("/hello", handler.NewHelloHandler().Job)
+	b.Handle("/hello", handler.Hello)
+
+	b.Handle("/start", handler.Start)
 
 	log.Info("陶朱公启动................................................................")
 	b.Start()
