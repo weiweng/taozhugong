@@ -10,7 +10,7 @@ import (
 	"github.com/weiweng/taozhugong/helper/env"
 )
 
-const appDir = "ade"
+const appDir = "taozhugong"
 
 var Root string
 
