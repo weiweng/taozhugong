@@ -1,14 +1,22 @@
 package main
 
 import (
-	"log"
 	"os"
 	"time"
 
+	log "github.com/sirupsen/logrus"
+	"github.com/weiweng/taozhugong/handler"
+	"github.com/weiweng/taozhugong/repo/logs"
 	tele "gopkg.in/telebot.v3"
 )
 
+func initFuncs() {
+	logs.Init()
+}
+
 func main() {
+	initFuncs()
+
 	pref := tele.Settings{
 		Token:  os.Getenv("TG_TOKEN"),
 		Poller: &tele.LongPoller{Timeout: 10 * time.Second},
@@ -17,12 +25,10 @@ func main() {
 	b, err := tele.NewBot(pref)
 	if err != nil {
 		log.Fatal(err)
-		return
 	}
 
-	b.Handle("/hello", func(c tele.Context) error {
-		return c.Send("Hello!")
-	})
+	b.Handle("/hello", handler.NewHelloHandler().Job)
 
+	log.Info("陶朱公启动................................................................")
 	b.Start()
 }
