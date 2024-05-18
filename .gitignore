@@ -24,3 +24,5 @@ go.work
 output
 output/
 taozhugong
+log
+log/
